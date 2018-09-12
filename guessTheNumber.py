@@ -9,35 +9,62 @@ User has default six chances to guess the number. The default random number rang
 
 from random import randint
 
-# banner
-print('I am thinking of a number between 1 and 20.\nYou have 6 chances to guess it.')
+while(1): # main game loop
+	# banner
+	print('I am thinking of a number between 1 and 20.\nYou have 6 chances to guess it.')
 
-# range for random number generation
-UPPERBOUND = 20
-LOWERBOUND = 1
+	# range for random number generation
+	UPPERBOUND = 20
+	LOWERBOUND = 1
 
-MAX_ATTEMPTS = 6
+	MAX_ATTEMPTS = 6
 
-answer = randint(LOWERBOUND, UPPERBOUND) # generate a random answer
-attempt = 0
+	answer = randint(LOWERBOUND, UPPERBOUND) # generate a random answer
+	attempt = 0
+	gameOver = 0
 
-while attempt < MAX_ATTEMPTS:
-	print('Take a guess.')
-	attempt += 1
-	try:
-		guess = int(input())
-	except ValueError:
-		print('Please enter an integer number.')
-		continue
-	if guess == answer:
-		print('Good job! You guessed my number in {} guesses.'.format(str(attempt)))
+	while attempt < MAX_ATTEMPTS:
+		print('Take a guess.')
+		attempt += 1
+		try:
+			guess = int(input())
+		except ValueError:
+			print('Please enter an integer number.')
+			continue
+		if guess == answer:
+			print('Good job! You guessed my number in {} guesses.'.format(str(attempt)))
+			break
+		elif guess < answer:
+			print('Your guess is too low')
+			continue
+		else:
+			print('Your guess is too high')
+			continue
+
+	if attempt == MAX_ATTEMPTS: # max attempt limit reached
+		print('Sorry, you have used all your chances. The number I am thinking of is {}.'.format(str(answer)))
+
+	while (1): # input loop for whether user wants to try again
+		tryAgain = input("Do you want to play again? Y/N\n")
+		if len(tryAgain) == 1:
+			if tryAgain == 'N' or tryAgain == 'n':
+				gameOver = 1
+				break
+			elif tryAgain == 'Y' or tryAgain == 'y':
+				print('\n')
+				break
+			else:
+				print("Invalid input, please enter 'Y' or 'N'")
+		else:
+			print("Invalid input, please enter 'Y' or 'N'")
+
+	if gameOver:
+		print("Thank you for playing the game. Game Over!")
 		break
-	elif guess < answer:
-		print('Your guess is too low')
-		continue
-	else:
-		print('Your guess is too high')
-		continue
 
-if attempt == MAX_ATTEMPTS: # max attempt limit reached
-	print('Sorry, you have used all your chances. The number I am thinking of is {}.'.format(str(answer)))
+
+
+
+
+
+
