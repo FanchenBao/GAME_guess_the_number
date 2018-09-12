@@ -12,10 +12,16 @@ from random import randint
 # banner
 print('I am thinking of a number between 1 and 20.\nYou have 6 chances to guess it.')
 
-answer = randint(1, 20) # generate a random answer
+# range for random number generation
+UPPERBOUND = 20
+LOWERBOUND = 1
+
+MAX_ATTEMPTS = 6
+
+answer = randint(LOWERBOUND, UPPERBOUND) # generate a random answer
 attempt = 0
 
-while attempt < 6:
+while attempt < MAX_ATTEMPTS:
 	print('Take a guess.')
 	attempt += 1
 	try:
@@ -33,5 +39,5 @@ while attempt < 6:
 		print('Your guess is too high')
 		continue
 
-if attempt == 6: # max attempt limit reached
+if attempt == MAX_ATTEMPTS: # max attempt limit reached
 	print('Sorry, you have used all your chances. The number I am thinking of is {}.'.format(str(answer)))
